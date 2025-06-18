@@ -1,17 +1,19 @@
-name: Expo Android APK Build
+name: Expo Android APK Build (EAS)
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
-  workflow_dispatch:
 
 jobs:
-  expo-build:
-    name: Build APK via Expo Classic
+  build:
     runs-on: ubuntu-latest
 
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
     steps:
-      - name: Checkout Repo
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Set up Node.js
@@ -19,15 +21,11 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Expo CLI
-        run: npm install -g expo-cli
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
 
-      - name: Install Dependencies
+      - name: Install Project Dependencies
         run: npm install
 
-      - name: Log in to Expo (guest account)
-        run: expo login -u guest -p guest
-
-      - name: Start Expo Classic Build (APK)
-        run: |
-          expo build:android -t apk --non-interactive
+      - name: Build Android APK
+        run: eas build --platform android --profile preview --non-interactive

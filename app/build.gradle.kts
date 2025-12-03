@@ -19,7 +19,7 @@ android {
             useSupportLibrary = true
         }
         
-        buildConfigField("String", "TMDB_API_KEY", "\"YOUR_TMDB_API_KEY\"")
+        buildConfigField("String", "TMDB_API_KEY", "\"b23ec55eabe9c0cb170d9571617e1ebe\"")
         buildConfigField("String", "TMDB_BASE_URL", "\"https://api.themoviedb.org/3/\"")
         buildConfigField("String", "TMDB_IMAGE_URL", "\"https://image.tmdb.org/t/p/\"")
     }
